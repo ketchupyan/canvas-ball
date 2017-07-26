@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call一切皆可借</title>
+</head>
+<body>
+    <script>
+    //函数是JS一等对象
+    //JS没有类，Class只是语法糖
+    //借用构造函数
+    //['sven'];按顺序给
+    var A = function(name){
+       this.name=name;
+    }
+    var B = function(){
+        //想要一个name属性
+        //向A借一下
+        //apply和call一样的
+        //A函数执行一下，函数内部的this被指向
+        //指定为第一个参数
+        //this -> B的实例
+        //['sven']
+        A.call(this,arguments[0]);
+        //A.apply(this,arguments);
+    }
+
+    B.prototype.getName = function(){
+        console.log(this.name);
+    }
+    var b = new B('sven');
+    b.getName();
+    //立即执行 创建闭包空间
+    (function(){
+         //var y = 2;
+         //alert(X + y);
+         console.log[arguments];
+         //arguments是类数组，没有push的功能
+         //js的借是超越种族的，超越任何的限制
+         Array.prototype.push.call(arguments, 3)
+         console.log(arguments)
+    })(1,2);
+    </script>
+</body>
+</html>
